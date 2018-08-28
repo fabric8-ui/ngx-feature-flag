@@ -18,7 +18,16 @@ function release() {
     # Enable verbose output
     npm config set loglevel verbose
 
-    # Build and Release Planner (It will update the tag on github and push fabric8-planner to npmjs.org)
+    # Set the branch as it defaults to the branch 'origin/master'
+    git checkout master
+    export GIT_BRANCH=master
+
+
+    # check where we are
+    git branch -va
+    git remote -v
+
+    # Build and Release
     npm run semantic-release
 
     # create_merge_PR
