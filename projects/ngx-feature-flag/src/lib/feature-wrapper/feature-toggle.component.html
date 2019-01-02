@@ -1,0 +1,10 @@
+<ng-container *ngIf="(feature$ | async) as feature">
+  <ng-container [ngTemplateOutlet]="template"></ng-container>
+
+  <ng-template #featureOptInPage>
+    <f8-feature-warning-page
+      [level]="feature.level"
+      (onOptInButtonClick)="setUserLevelTemplate()"
+    ></f8-feature-warning-page>
+  </ng-template>
+</ng-container>
