@@ -8,6 +8,7 @@ export { FeatureContainerComponent } from './lib/feature-loader/feature-loader.c
 export { FeatureToggleComponent } from './lib/feature-wrapper/feature-toggle.component';
 
 export { FeatureTogglesService, FABRIC8_FEATURE_TOGGLES_API_URL } from './lib/service/feature-toggles.service';
+export { EnableFeatureService } from './lib/service/enable-feature.service';
 
 export { Feature } from './lib/models/feature';
 export { FeatureFlagConfig } from './lib/models/feature-flag-config';
