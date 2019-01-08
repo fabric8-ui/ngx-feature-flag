@@ -35,7 +35,7 @@ class TestHostComponent2 {}
 })
 class TestWarningComponent {}
 
-fdescribe('FeatureToggleComponent', () => {
+describe('FeatureToggleComponent', () => {
   let mockFeatureService: jasmine.SpyObj<FeatureTogglesService>;
   let hostFixture1: ComponentFixture<TestHostComponent1>;
   let hostFixture2: ComponentFixture<TestHostComponent2>;
