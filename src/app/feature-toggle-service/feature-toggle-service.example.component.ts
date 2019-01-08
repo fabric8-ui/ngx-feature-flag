@@ -17,7 +17,8 @@ import { FeatureTogglesService } from 'ngx-feature-flag';
       }
     `
   ],
-  templateUrl: './feature-toggle-service.example.component.html'
+  templateUrl: './feature-toggle-service.example.component.html',
+  providers: [FeatureTogglesService]
 })
 export class FeatureToggleServiceExampleComponent {
   getAllFeaturesOutput: string;

@@ -1,14 +1,9 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import { Logger } from 'ngx-base';
 import { AuthenticationService, Profile, User, UserService } from 'ngx-login-client';
-import {
-  ConnectableObservable,
-  Observable,
-  Subscription,
-  throwError as observableThrowError
-} from 'rxjs';
+import { ConnectableObservable, Observable, throwError as observableThrowError } from 'rxjs';
 import { catchError, map, publish } from 'rxjs/operators';
 import { FABRIC8_FEATURE_TOGGLES_API_URL } from './feature-toggles.service';
 
@@ -27,9 +22,8 @@ export class ExtProfile extends Profile {
 }
 
 @Injectable()
-export class EnableFeatureService implements OnDestroy {
+export class EnableFeatureService {
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  protected subscriptions: Subscription[] = [];
   private usersUrl: string;
 
   constructor(
@@ -43,12 +37,6 @@ export class EnableFeatureService implements OnDestroy {
       this.headers = this.headers.set('Authorization', 'Bearer ' + this.auth.getToken());
     }
     this.usersUrl = apiUrl + 'users';
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => {
-      sub.unsubscribe();
-    });
   }
 
   createTransientProfile(): ExtProfile {

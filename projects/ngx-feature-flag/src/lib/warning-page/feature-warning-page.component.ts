@@ -31,7 +31,7 @@ export class FeatureWarningPageComponent implements OnInit, OnDestroy {
       {
         title: 'Internal',
         description:
-          'These features are only available to Red Hat users and have no guarantee of performance or stability.Use these at your own risk.'
+          'These features are only available to Red Hat users and have no guarantee of performance or stability. Use these at your own risk.'
       }
     ],
     [
@@ -39,7 +39,7 @@ export class FeatureWarningPageComponent implements OnInit, OnDestroy {
       {
         title: 'Experminetal',
         description:
-          'These features are currently in experimental testing and have no guarantee of performance or stability.Use these at your own risk.'
+          'These features are currently in experimental testing and have no guarantee of performance or stability. Use these at your own risk.'
       }
     ],
     [
@@ -47,7 +47,7 @@ export class FeatureWarningPageComponent implements OnInit, OnDestroy {
       {
         title: 'Beta',
         description:
-          'These features are currently in beta testing and have no guarantee of performance or stability.Use these at your own risk.'
+          'These features are currently in beta testing and have no guarantee of performance or stability. Use these at your own risk.'
       }
     ]
   ]);
@@ -89,13 +89,13 @@ export class FeatureWarningPageComponent implements OnInit, OnDestroy {
           this.userService.currentLoggedInUser = user;
           this.onOptInButtonClick.emit();
           this.notifications.message({
-            message: `Feature Enabled!`,
+            message: this.featureWarning.title + ` feature level enabled`,
             type: NotificationType.SUCCESS
           });
         },
         () => {
           this.notifications.message({
-            message: 'Failed to enable Feature',
+            message: 'Failed to enable ' + this.featureWarning.title + ' feature level',
             type: NotificationType.DANGER
           });
         }

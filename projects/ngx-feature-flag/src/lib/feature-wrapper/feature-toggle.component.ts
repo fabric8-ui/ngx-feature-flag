@@ -4,7 +4,7 @@ import { FeatureTogglesService } from '../service/feature-toggles.service';
 import { Feature } from '../models/feature';
 import { map, catchError, tap } from 'rxjs/operators';
 
-export interface FeatureEnablementData {
+interface FeatureEnablementData {
   enabled: boolean;
   level: string;
 }
