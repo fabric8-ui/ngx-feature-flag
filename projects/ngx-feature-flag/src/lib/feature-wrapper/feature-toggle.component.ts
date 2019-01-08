@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FeatureTogglesService } from '../service/feature-toggles.service';
 import { Feature } from '../models/feature';
@@ -9,15 +9,13 @@ import { map, catchError, tap } from 'rxjs/operators';
   templateUrl: './feature-toggle.component.html'
 })
 export class FeatureToggleComponent implements OnInit {
-  @ViewChild('featureOptInPage') featureOptInPage: TemplateRef<any>;
-
   @Input() featureName: string;
   @Input() userLevel: TemplateRef<any>;
   @Input() defaultLevel: TemplateRef<any>;
   @Input() showFeatureOptIn: boolean;
 
+  isFeatureUserEnabled: boolean = false;
   feature$: Observable<{} | Feature>;
-  template: TemplateRef<any>;
 
   constructor(private featureService: FeatureTogglesService) {}
 
@@ -36,13 +34,9 @@ export class FeatureToggleComponent implements OnInit {
           return {};
         }
       }),
-      tap((feature) => {
+      tap((feature: any) => {
         if (feature && feature.enabled) {
-          this.template = this.userLevel;
-        } else if (this.showFeatureOptIn) {
-          this.template = this.featureOptInPage;
-        } else {
-          this.template = this.defaultLevel;
+          this.isFeatureUserEnabled = true;
         }
       }),
       catchError(() => of({}))
@@ -50,6 +44,6 @@ export class FeatureToggleComponent implements OnInit {
   }
 
   setUserLevelTemplate() {
-    this.template = this.userLevel;
+    this.isFeatureUserEnabled = true;
   }
 }
