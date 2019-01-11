@@ -4,11 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Broadcaster, Logger } from 'ngx-base';
-import { AUTH_API_URL, AuthenticationService, REALM, SSO_API_URL, UserService } from 'ngx-login-client';
-import { FeatureFlagModule } from '../../projects/ngx-feature-flag/src/lib/feature-flag.module';
-import { FABRIC8_FEATURE_TOGGLES_API_URL, FeatureTogglesService }
- from '../../projects/ngx-feature-flag/src/lib/service/feature-toggles.service';
+import { Broadcaster, Logger, Notifications } from 'ngx-base';
+import {
+  AUTH_API_URL,
+  AuthenticationService,
+  REALM,
+  SSO_API_URL,
+  UserService
+} from 'ngx-login-client';
+import { FeatureFlagModule } from 'ngx-feature-flag';
+import { FABRIC8_FEATURE_TOGGLES_API_URL, FeatureTogglesService } from 'ngx-feature-flag';
 import { AppRoutingModule } from './app-routing.module';
 // App components
 import { AppComponent } from './app.component';
@@ -19,6 +24,10 @@ import { NavbarModule } from './navbar/navbar.module';
 import { FeatureTogglesServiceMock } from './service/feature-toggles-mock.service';
 import { DemoComponentsModule } from './welcome/demo-components.module';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { EnableFeatureService } from 'ngx-feature-flag';
+import { EnableFeatureMockService } from './service/enable-feature-mock.service';
+import { NotificationsMockService } from './service/notifications-mock.service';
+
 @NgModule({
   imports: [
     AppRoutingModule,
@@ -34,22 +43,25 @@ import { WelcomeComponent } from './welcome/welcome.component';
     FeatureToggleLoaderExampleModule,
     FeatureToggleServiceExampleModule
   ],
-  declarations: [
-    AppComponent,
-    WelcomeComponent
-  ],
+  declarations: [AppComponent, WelcomeComponent],
   providers: [
-    {provide: AUTH_API_URL, useValue: 'https://auth.prod-preview.openshift.io/api/'},
-    {provide: SSO_API_URL, useValue: 'https://sso.prod-preview.openshift.io/api/'},
-    {provide: REALM, useValue: ''},
-    {provide: FABRIC8_FEATURE_TOGGLES_API_URL, useValue: 'https://api.prod-preview.openshift.io/api/'},
+    { provide: AUTH_API_URL, useValue: 'https://auth.prod-preview.openshift.io/api/' },
+    { provide: SSO_API_URL, useValue: 'https://sso.prod-preview.openshift.io/api/' },
+    { provide: REALM, useValue: '' },
+    {
+      provide: FABRIC8_FEATURE_TOGGLES_API_URL,
+      useValue: 'https://api.prod-preview.openshift.io/api/'
+    },
     Broadcaster,
     AuthenticationService,
     UserService,
     Logger,
+    Notifications,
     // FeatureTogglesService //uncomment if you want to use prod-preview service
-    {provide: FeatureTogglesService, useClass: FeatureTogglesServiceMock}
+    { provide: FeatureTogglesService, useClass: FeatureTogglesServiceMock },
+    { provide: EnableFeatureService, useClass: EnableFeatureMockService },
+    { provide: Notifications, useClass: NotificationsMockService }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

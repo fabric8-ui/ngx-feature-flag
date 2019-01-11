@@ -7,12 +7,15 @@ export { FeatureFlagHomeComponent } from './lib/home/feature-flag-home.component
 export { FeatureContainerComponent } from './lib/feature-loader/feature-loader.component';
 export { FeatureToggleComponent } from './lib/feature-wrapper/feature-toggle.component';
 
-export { FeatureTogglesService, FABRIC8_FEATURE_TOGGLES_API_URL } from './lib/service/feature-toggles.service';
+export {
+  FeatureTogglesService,
+  FABRIC8_FEATURE_TOGGLES_API_URL
+} from './lib/service/feature-toggles.service';
 export { EnableFeatureService } from './lib/service/enable-feature.service';
+export { FeatureFlagMapping } from './lib/feature-flag.mapping';
 
 export { Feature } from './lib/models/feature';
 export { FeatureFlagConfig } from './lib/models/feature-flag-config';
 export { FeatureFlagResolver } from './lib/resolver/feature-flag.resolver';
 
 export { FeatureFlagModule } from './lib/feature-flag.module';
-
