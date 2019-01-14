@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Feature } from '../../../projects/ngx-feature-flag/src/lib//models/feature';
+import { Feature } from 'ngx-feature-flag';
 
 @Injectable()
-export class FeatureTogglesServiceMock  {
+export class FeatureTogglesServiceMock {
   featureFlagName: string;
   featureFlagEnablementLevel: string;
   featureFlagEnable: boolean;
@@ -20,13 +20,20 @@ export class FeatureTogglesServiceMock  {
       return true;
     }
     if (this.userLevel === 'beta') {
-      if (this.featureFlagEnablementLevel === 'internal' || this.featureFlagEnablementLevel === 'experimental') {
+      if (
+        this.featureFlagEnablementLevel === 'internal' ||
+        this.featureFlagEnablementLevel === 'experimental'
+      ) {
         return false;
       }
       return true;
     }
     if (this.userLevel === 'released') {
-      if (this.featureFlagEnablementLevel === 'internal' || this.featureFlagEnablementLevel === 'experimental' || this.featureFlagEnablementLevel === 'beta') {
+      if (
+        this.featureFlagEnablementLevel === 'internal' ||
+        this.featureFlagEnablementLevel === 'experimental' ||
+        this.featureFlagEnablementLevel === 'beta'
+      ) {
         return false;
       }
       return true;
@@ -34,13 +41,13 @@ export class FeatureTogglesServiceMock  {
     return false;
   }
   getFeature(id: string): Observable<Feature> {
-    const feature =  {
+    const feature = {
       attributes: {
         'user-enabled': this.isUserLevelEnabled(),
-        'enabled': this.featureFlagEnable,
+        enabled: this.featureFlagEnable,
         'enablement-level': this.featureFlagEnablementLevel,
-        'description': 'description',
-        'name': this.featureFlagName
+        description: 'description',
+        name: this.featureFlagName
       },
       id: this.featureFlagName
     } as Feature;
@@ -51,13 +58,13 @@ export class FeatureTogglesServiceMock  {
     return of();
   }
   isFeatureUserEnabled(id: string): Observable<{} | boolean> {
-    const feature =  {
+    const feature = {
       attributes: {
         'user-enabled': this.isUserLevelEnabled(),
-        'enabled': this.featureFlagEnable,
+        enabled: this.featureFlagEnable,
         'enablement-level': this.featureFlagEnablementLevel,
-        'description': 'description',
-        'name': this.featureFlagName
+        description: 'description',
+        name: this.featureFlagName
       },
       id: this.featureFlagName
     } as Feature;

@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TabsetConfig, TabsModule } from 'ngx-bootstrap/tabs';
 
-import { FeatureFlagModule } from '../../../projects/ngx-feature-flag/src/lib/feature-flag.module';
+import { FeatureFlagModule } from 'ngx-feature-flag';
 import { DemoComponentsModule } from '../welcome/demo-components.module';
 import { FeatureToggleExampleComponent } from './feature-toggle.example.component';
+import { UserService, AuthenticationService } from 'ngx-login-client';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { FeatureToggleExampleComponent } from './feature-toggle.example.componen
   ],
   declarations: [FeatureToggleExampleComponent],
   exports: [FeatureToggleExampleComponent],
-  providers: [TabsetConfig]
+  providers: [TabsetConfig, UserService, AuthenticationService]
 })
 export class FeatureToggleExampleModule {
   constructor() {}

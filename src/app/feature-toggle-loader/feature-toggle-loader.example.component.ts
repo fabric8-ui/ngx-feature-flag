@@ -1,26 +1,23 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnInit, ViewChild
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 
-import { FeatureContainerComponent } from '../../../projects/ngx-feature-flag/src/lib/feature-loader/feature-loader.component';
-import { FeatureTogglesService } from '../../../projects/ngx-feature-flag/src/lib/service/feature-toggles.service';
-
+import { FeatureContainerComponent } from 'ngx-feature-flag';
+import { FeatureTogglesService } from 'ngx-feature-flag';
 
 @Component({
   selector: 'app-feature-toggle-loader-example',
-  styles: [`
-    .sample-form .form-horizontal .form-group {
-      margin-left: 0px;
-    }
-    .padding-top-15 {
-      padding-top: 15px;
-    }
-    .padding-bottom-15 {
-      padding-bottom: 15px;
-    }
-  `],
+  styles: [
+    `
+      .sample-form .form-horizontal .form-group {
+        margin-left: 0px;
+      }
+      .padding-top-15 {
+        padding-top: 15px;
+      }
+      .padding-bottom-15 {
+        padding-bottom: 15px;
+      }
+    `
+  ],
   templateUrl: './feature-toggle-loader.example.component.html'
 })
 export class FeatureToggleLoaderExampleComponent implements OnInit {
@@ -32,8 +29,7 @@ export class FeatureToggleLoaderExampleComponent implements OnInit {
   featureFlagEnablementLevel: string = 'beta';
   userLevel: string = 'internal';
 
-  constructor(private featureToggleService: FeatureTogglesService, private cd: ChangeDetectorRef) {
-  }
+  constructor(private featureToggleService: FeatureTogglesService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     (this.featureToggleService as any).featureFlagName = this.featureFlagName;
@@ -46,16 +42,21 @@ export class FeatureToggleLoaderExampleComponent implements OnInit {
     if ((this.featureToggleService as any).featureFlagName === undefined) {
       return;
     }
-    if (this.featureFlagEnablementLevel !== 'internal' &&
+    if (
+      this.featureFlagEnablementLevel !== 'internal' &&
       this.featureFlagEnablementLevel !== 'experimental' &&
       this.featureFlagEnablementLevel !== 'beta' &&
-      this.featureFlagEnablementLevel !== 'released') {
-      this.featureFlagEnablementLevel = (this.featureToggleService as any).featureFlagEnablementLevel; // keep previous valid version
+      this.featureFlagEnablementLevel !== 'released'
+    ) {
+      this.featureFlagEnablementLevel = (this
+        .featureToggleService as any).featureFlagEnablementLevel; // keep previous valid version
     }
-    if (this.userLevel !== 'internal' &&
+    if (
+      this.userLevel !== 'internal' &&
       this.userLevel !== 'experimental' &&
       this.userLevel !== 'beta' &&
-      this.userLevel !== 'released') {
+      this.userLevel !== 'released'
+    ) {
       this.userLevel = (this.featureToggleService as any).userLevel; // keep previous valid version
     }
     (this.featureToggleService as any).featureFlagName = this.featureFlagName;
